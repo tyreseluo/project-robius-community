@@ -1,0 +1,9 @@
+[package]
+name = "project-robius-community"
+version = "0.0.1"
+edition = "2021"
+readme = "README.md"
+
+
+[dependencies]
+makepad-widgets = { git = "https://github.com/makepad/makepad", branch = "rik" }
