@@ -7,21 +7,15 @@ live_design! {
     import crate::views::login::login_screen::*;
 
     App = {{App}} {
-        ui: <Root> {
-            main_window = <Window> {
-                body = <ScrollXYView>{
+        ui: <Window> {
+            body = {
+                <View> {
+                    width: Fill, height: Fill,
+                    flow: Overlay,
 
-                    flow: Down,
-                    spacing:10,
-                    align: {
-                        x: 0.5,
-                        y: 0.5
-                    },
-                    button = <Button> {
-                        text: "Hello World",
+                    login_screen_view = <View> {
+                        login_screen = <LoginScreen> {}
                     }
-
-                    <LoginScreen> {}
                 }
             }
         }
@@ -48,8 +42,15 @@ impl LiveRegister for App {
     }
 }
 
+impl MatchEvent for App {
+    fn handle_startup(&mut self, _cx: &mut Cx) {
+        log!("App started");
+    }
+}
+
 impl AppMain for App {
     fn handle_event(&mut self, cx: &mut Cx, event: &Event) {
+        self.match_event(cx, event);
         self.ui.handle_event(cx, event, &mut Scope::empty());
     }
 }
